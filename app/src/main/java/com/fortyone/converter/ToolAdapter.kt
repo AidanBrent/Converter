@@ -20,8 +20,6 @@ class ToolAdapter(private var toolList: List<Tool>, private val onItemClicked: (
                 false
             )
         )
-
-
         return toolViewHolder
     }
 

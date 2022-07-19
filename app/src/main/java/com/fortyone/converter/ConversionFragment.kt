@@ -1,9 +1,6 @@
 package com.fortyone.converter
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,11 +8,8 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.navArgs
 import com.fortyone.converter.databinding.FragmentConversionBinding
-import com.fortyone.converter.databinding.FragmentToolListBinding
-import com.fortyone.converter.model.ConversionUnit
 
 class ConversionFragment : Fragment() {
 
@@ -55,7 +49,6 @@ class ConversionFragment : Fragment() {
             viewModel.updateUnitsFromArray(resources.getStringArray(it))
         }
 
-
         //Populate the spinners based on the array created in the View Model
         viewModel.unitArray.observe(viewLifecycleOwner){ it ->
             val arrayAdapter = ArrayAdapter(
@@ -66,13 +59,11 @@ class ConversionFragment : Fragment() {
             binding.tvUnit1.setAdapter(arrayAdapter)
             binding.tvUnit2.setAdapter(arrayAdapter)
         }
-
             //Call the local function which loads listeners onto the dropdown menu, which determine which conversion unit is selected
             loadSpinnerListeners()
             //Call the local function which loads textWatcher onto the edit boxes, which performs the conversion while text is being changed.
             loadTextWatchers()
         }
-
 
     //This function loads the text watchers onto the edit boxes, allowing the calculation to be
     //performed when the value of one of the text boxes is changed
@@ -96,7 +87,6 @@ class ConversionFragment : Fragment() {
             }
         }
     }
-
 
     //This function allows the result of the conversion to be displayed when the unit selection is changed
     private fun loadSpinnerListeners() {
@@ -146,7 +136,4 @@ class ConversionFragment : Fragment() {
             bEditTextBusy = false
         }
     }
-
-
-
 }
