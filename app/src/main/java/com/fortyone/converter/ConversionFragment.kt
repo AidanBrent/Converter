@@ -25,85 +25,53 @@ class ConversionFragment : Fragment() {
     private var _binding: FragmentConversionBinding? = null
     private val binding get() = _binding!!
 
-    private var valueList = mutableListOf<ConversionUnit>()
+    //Since editing one edit box changes the value in the other, this boolean value prevents an
+    //infinite loop, where the boxes infinitely change each other
     private var bEditTextBusy = false
+
+    //These values hold the conversion factor relevant to the currently selected Conversion Units
     private var globalFirstFactor = "1"
     private var globalSecondFactor = "1"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentConversionBinding.inflate(layoutInflater, container, false)
-        //populateList(args.toolName)
         return binding.root
     }
 
-    //private fun populateList(toolName: String) {
-        //viewModel.locateArrayResource(args.toolName)
-    //}
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //populateList(args.toolName)
+
+        //Pass fragment transaction argument stating which tool was selected, to the View Model
+        viewModel.locateArrayResource(args.toolName)
+
+        //When the correct ID for the array resource (based on the selected tool) is determined by the ViewModel,
+        //a global array is retrieved from the context resources and passed back to the viewmodel which then creates
+        //an List containing the relevant Conversion Units
+        viewModel.unitList.observe(viewLifecycleOwner){
+            viewModel.updateUnitsFromArray(resources.getStringArray(it))
+        }
 
 
-
-        //viewModel.locateArrayResource(args.toolName)
-
-        //viewModel.unitList.observe(viewLifecycleOwner){
-            //viewModel.updateUnitsFromArray(resources.getStringArray(it))
-        //}
-
-
-        //Populate the spinners based on the array fetched from context resource
-        /*viewModel.unitArray.observe(viewLifecycleOwner){ it ->
-            valueList = it
+        //Populate the spinners based on the array created in the View Model
+        viewModel.unitArray.observe(viewLifecycleOwner){ it ->
             val arrayAdapter = ArrayAdapter(
                 requireContext(),
                 R.layout.dropdown_item,
-                valueList.map { it.name }
-            )*/
-
-            //arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            //binding.tvUnit1.setAdapter(arrayAdapter)
-            //binding.tvUnit2.setAdapter(arrayAdapter)
-        //}
-        when (args.toolName) {
-            "Distance" -> {
-                populateSpinners(R.array.distance_combo)
-            //val toolId = R.array.distance_combo
-            }
-            "Liquid" -> {
-                populateSpinners(R.array.liquid_combo)
-                //val toolId = R.array.liquid_combo
-            }
+                it.map { it.name}
+            )
+            binding.tvUnit1.setAdapter(arrayAdapter)
+            binding.tvUnit2.setAdapter(arrayAdapter)
         }
 
-
-
+            //Call the local function which loads listeners onto the dropdown menu, which determine which conversion unit is selected
             loadSpinnerListeners()
+            //Call the local function which loads textWatcher onto the edit boxes, which performs the conversion while text is being changed.
             loadTextWatchers()
         }
-
-    fun populateSpinners(toolId : Int) {
-
-        val array = resources.getStringArray(toolId)
-
-        array.map {
-            val (unit, factor) = it.split(";")
-            valueList.add(ConversionUnit(unit, factor))
-        }
-
-        val arrayAdapter = ArrayAdapter(
-            requireContext(),
-            R.layout.dropdown_item,
-            valueList.map {it.name}
-        )
-        binding.tvUnit1.setAdapter(arrayAdapter)
-        binding.tvUnit2.setAdapter(arrayAdapter)
-    }
 
 
     //This function loads the text watchers onto the edit boxes, allowing the calculation to be
@@ -113,7 +81,6 @@ class ConversionFragment : Fragment() {
             edtValue1.doOnTextChanged { text, _, _, _ ->
                 validateAndCalculate(
                     text,
-                    edtValue1,
                     edtValue2,
                     globalFirstFactor,
                     globalSecondFactor
@@ -122,7 +89,6 @@ class ConversionFragment : Fragment() {
             edtValue2.doOnTextChanged { text, _, _, _ ->
                 validateAndCalculate(
                     text,
-                    edtValue2,
                     edtValue1,
                     globalSecondFactor,
                     globalFirstFactor
@@ -132,26 +98,23 @@ class ConversionFragment : Fragment() {
     }
 
 
-    //This function allows the result of the conversion to be displayed when a new conversion unit
-    //is selected
+    //This function allows the result of the conversion to be displayed when the unit selection is changed
     private fun loadSpinnerListeners() {
         with(binding) {
             tvUnit1.setOnItemClickListener { _, _, pos, _ ->
-                globalFirstFactor = valueList[pos].factor
+                globalFirstFactor = viewModel.unitArray.value?.get(pos)?.factor ?: "0"
                 validateAndCalculate(
                     edtValue2.text.toString(),
-                    edtValue2,
                     edtValue1,
                     globalSecondFactor,
                     globalFirstFactor
-                )
+                 )
             }
 
             tvUnit2.setOnItemClickListener { _, _, pos, _ ->
-                globalSecondFactor = valueList[pos].factor
+                globalSecondFactor = viewModel.unitArray.value?.get(pos)?.factor ?: "0"
                 validateAndCalculate(
                     edtValue1.text.toString(),
-                    edtValue1,
                     edtValue2,
                     globalFirstFactor,
                     globalSecondFactor
@@ -161,10 +124,8 @@ class ConversionFragment : Fragment() {
         }
     }
 
-
-
+    //This function validates the input and displays the result
     private fun validateAndCalculate(text: CharSequence?,
-                                     firstEditText: EditText,
                                      secondEditText: EditText,
                                      firstFactor : String,
                                      secondFactor: String) {
