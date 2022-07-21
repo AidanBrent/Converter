@@ -1,13 +1,10 @@
 package com.fortyone.converter
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.fortyone.converter.model.ConversionUnit
 import com.fortyone.converter.model.Direction
-import com.fortyone.converter.model.Status
-import java.text.DecimalFormat
 
 class ConversionFragmentViewModel: ViewModel() {
 
@@ -31,12 +28,9 @@ class ConversionFragmentViewModel: ViewModel() {
     //A function to be called by the UI layer, determining which tool was selected.
     fun locateArrayResource(toolName: String) {
         when (toolName) {
-            "Distance" -> {
-                _unitID.postValue(R.array.distance_combo)
-            }
-            "Liquid" -> {
-                _unitID.postValue(R.array.liquid_combo)
-            }
+            "Distance" -> _unitID.postValue(R.array.distance_combo)
+            "Liquid" -> _unitID.postValue(R.array.liquid_combo)
+            "Area" -> _unitID.postValue(R.array.area_combo)
         }
     }
 

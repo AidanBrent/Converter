@@ -17,7 +17,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:ems="10"
-            android:inputType="numberDecimal"
+            android:inputType="number|numberDecimal"
             android:selectAllOnFocus="true"
             app:layout_constraintBottom_toBottomOf="@+id/tilFirstUnit"
             app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:ems="10"
-            android:inputType="number"
+            android:inputType="number|numberDecimal"
             android:selectAllOnFocus="true"
             app:layout_constraintBottom_toBottomOf="@+id/tilSecondUnit"
             app:layout_constraintEnd_toEndOf="@+id/edtValue1"
@@ -80,20 +80,24 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/tvFull1"
+            android:id="@+id/tvExact1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/edtValue1"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edtValue1"
             tools:text="3.145678915" />
 
         <TextView
-            android:id="@+id/tvFull2"
+            android:id="@+id/tvExact2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/edtValue2"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/edtValue2"
             tools:text="2.145983445" />
 
@@ -105,7 +109,7 @@
             android:src="@drawable/ic_convert"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFull1" />
+            app:layout_constraintTop_toBottomOf="@+id/tvExact1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

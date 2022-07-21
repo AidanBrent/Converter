@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doBeforeTextChanged
 import androidx.core.widget.doOnTextChanged
@@ -28,6 +29,8 @@ class ConversionFragment : Fragment() {
 
     private var _binding: FragmentConversionBinding? = null
     private val binding get() = _binding!!
+
+    val displayFormat = DecimalFormat("####.####")
 
     //Since editing one edit box changes the value in the other, this boolean value prevents an
     //infinite loop, where the boxes infinitely change each other
@@ -51,19 +54,26 @@ class ConversionFragment : Fragment() {
         viewModel.locateArrayResource(args.toolName)
 
         //When the correct ID for the array resource (based on the selected tool) is determined by the ViewModel,
-        //a global array is retrieved from the context resources and passed back to the viewmodel which then creates
-        //an List containing the relevant Conversion Units
+        //a global array is retrieved from the context resources and passed back to the View Model which then creates
+        //a List containing the relevant Conversion Units
         viewModel.unitList.observe(viewLifecycleOwner) {
             viewModel.updateUnitsFromArray(resources.getStringArray(it))
         }
 
         //Fetch and Display the current values for the Edit Texts
         viewModel.firstValue.observe(viewLifecycleOwner) {
-            binding.edtValue1.setText(DecimalFormat("#.#####").format(it))
+            binding.edtValue1.setText(displayFormat.format(it))
+            val display: String = it.toString().replace("E", " x10^")
+            binding.tvExact2.text = getString(R.string.exact, binding.edtValue2.text)
+            binding.tvExact1.text = getString(R.string.exact, display)
+
         }
 
         viewModel.secondValue.observe(viewLifecycleOwner) {
-            binding.edtValue2.setText(DecimalFormat("#.#####").format(it))
+            binding.edtValue2.setText(displayFormat.format(it))
+            val display: String = it.toString().replace("E", " x10^")
+            binding.tvExact1.text = getString(R.string.exact, binding.edtValue1.text)
+            binding.tvExact2.text = getString(R.string.exact, display)
         }
 
         //Populate the spinners based on the array created in the View Model
@@ -113,6 +123,7 @@ class ConversionFragment : Fragment() {
             tvUnit1.setOnItemClickListener { _, _, pos, _ ->
                 viewModel.changeFirstFactor(pos)
                 if (validate(edtValue2)) viewModel.calculate(edtValue2.text.toString().toDouble(), Direction.REVERSE)
+
             }
 
             tvUnit2.setOnItemClickListener { _, _, pos, _ ->
