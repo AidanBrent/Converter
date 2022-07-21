@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/toolListFragment"
         android:name="com.fortyone.converter.ToolListFragment"
-        android:label="fragment_tool_list"
-        tools:layout="@layout/fragment_tool_list" >
+        android:label="Tool Selection"
+        tools:layout="@layout/fragment_tool_list">
         <action
             android:id="@+id/action_toolListFragment_to_conversionFragment"
             app:destination="@id/conversionFragment" />
@@ -17,8 +17,8 @@
     <fragment
         android:id="@+id/conversionFragment"
         android:name="com.fortyone.converter.ConversionFragment"
-        android:label="fragment_conversion"
-        tools:layout="@layout/fragment_conversion" >
+        android:label="Unit Conversion"
+        tools:layout="@layout/fragment_conversion">
         <argument
             android:name="toolName"
             app:argType="string" />
