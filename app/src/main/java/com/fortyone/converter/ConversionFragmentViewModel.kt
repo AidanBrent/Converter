@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.fortyone.converter.model.ConversionUnit
 import com.fortyone.converter.model.Direction
 import com.fortyone.converter.model.Status
+import java.text.DecimalFormat
 
 class ConversionFragmentViewModel: ViewModel() {
 
@@ -24,11 +25,8 @@ class ConversionFragmentViewModel: ViewModel() {
     private val _secondValue = MutableLiveData<Double>()
     val secondValue: LiveData<Double> get() = _secondValue
 
-    //private val _status = MutableLiveData(Status.COMPLETE)
-    //val status : LiveData<Status> get() = _status
-
-    private var firstFactor : Double = 1.00
-    private var secondFactor : Double = 1.00
+    private var firstFactor = 1.00
+    private var secondFactor = 1.00
 
     //A function to be called by the UI layer, determining which tool was selected.
     fun locateArrayResource(toolName: String) {
@@ -50,7 +48,6 @@ class ConversionFragmentViewModel: ViewModel() {
             val (unit, factor) = it.split(";")
             array.add(ConversionUnit(unit, factor))
         }
-        Log.e("aidan2", array[0].factor)
         _unitArray.postValue(array)
 
         firstFactor = array[0].factor.toDouble()

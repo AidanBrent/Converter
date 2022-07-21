@@ -33,12 +33,7 @@ class ConversionFragment : Fragment() {
     //infinite loop, where the boxes infinitely change each other
     private var bEditTextBusy = false
 
-    //These values hold the conversion factor relevant to the currently selected Conversion Units
-    //private var globalFirstFactor = "1"
-    //private var globalSecondFactor = "1"
-
-    //Stores current result
-    //var result = 0.00
+    private var isManual = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -62,14 +57,14 @@ class ConversionFragment : Fragment() {
             viewModel.updateUnitsFromArray(resources.getStringArray(it))
         }
 
+        //Fetch and Display the current values for the Edit Texts
         viewModel.firstValue.observe(viewLifecycleOwner) {
-            binding.edtValue1.setText(it.toString())
+            binding.edtValue1.setText(DecimalFormat("#.#####").format(it))
         }
 
         viewModel.secondValue.observe(viewLifecycleOwner) {
-            binding.edtValue2.setText(it.toString())
+            binding.edtValue2.setText(DecimalFormat("#.#####").format(it))
         }
-
 
         //Populate the spinners based on the array created in the View Model
         viewModel.unitArray.observe(viewLifecycleOwner) { it ->
@@ -78,12 +73,9 @@ class ConversionFragment : Fragment() {
                 R.layout.dropdown_item,
                 it.map { it.name }
             )
-            //Populate initial display values and factors
+            //Populate initial dropdown values
             binding.tvUnit1.setText(it[0].name)
-            //globalFirstFactor = it[0].factor
             binding.tvUnit2.setText(it[0].name)
-            //globalSecondFactor = it[0].factor
-
             binding.tvUnit1.setAdapter(arrayAdapter)
             binding.tvUnit2.setAdapter(arrayAdapter)
 
@@ -96,57 +88,18 @@ class ConversionFragment : Fragment() {
 
     //This function loads the text watchers onto the edit boxes, allowing the calculation to be
     //performed when the value of one of the text boxes is changed
-//    private fun loadTextWatchers() {
-//        with(binding) {
-//            edtValue1.doBeforeTextChanged { text, _, _, _ ->
-//                /* validateAndCalculate(
-//                    text,
-//                    edtValue2,
-//                    globalFirstFactor,
-//                    globalSecondFactor
-//                )
-//                binding.edtValue1.text
-//                binding.tvFull1.text = result.toString()*/
-//                //if (!bEditTextBusy) {
-//                //bEditTextBusy = true
-//                viewModel.calculate(text.toString().toDouble(), Direction.FORWARD)
-//                //bEditTextBusy = false
-//            }
-//
-//
-//
-//            edtValue2.doBeforeTextChanged { text, _, _, _ ->
-//                /*validateAndCalculate(
-//                    text,
-//                    edtValue1,
-//                    globalSecondFactor,
-//                    globalFirstFactor
-//                )
-//                binding.tvFull2.text = result.toString()*/
-//                //if (!bEditTextBusy) {
-//                    //bEditTextBusy = true
-//                    viewModel.calculate(text.toString().toDouble(), Direction.REVERSE)
-//                    //bEditTextBusy = false
-//                }
-//            }
-//
-//        }
-
-    var isManual = true
-
     private fun loadTextWatchers() {
         with(binding) {
 
             edtValue1.doAfterTextChanged { text ->
-                if (isManual) {
+                if (isManual && validate(edtValue1)) {
                     viewModel.calculate(text.toString().toDouble(), Direction.FORWARD)
-
                 }
                 isManual = !isManual
             }
 
             edtValue2.doAfterTextChanged { text ->
-                if (isManual) {
+                if (isManual && validate(edtValue2)) {
                     viewModel.calculate(text.toString().toDouble(), Direction.REVERSE)
                 }
                 isManual = !isManual
@@ -158,62 +111,24 @@ class ConversionFragment : Fragment() {
     private fun loadSpinnerListeners() {
         with(binding) {
             tvUnit1.setOnItemClickListener { _, _, pos, _ ->
-                //globalFirstFactor = viewModel.unitArray.value?.get(pos)?.factor ?: "0"
-                //Log.e("Factors", globalFirstFactor)
-/*                validateAndCalculate(
-                    edtValue2.text.toString(),
-                    edtValue1,
-                    globalSecondFactor,
-                    globalFirstFactor
-                 )*/
                 viewModel.changeFirstFactor(pos)
-                //if (validate(binding.edtValue2)) viewModel.calculate(edtValue1.text.toString().toDouble(), Direction.REVERSE)
+                if (validate(edtValue2)) viewModel.calculate(edtValue2.text.toString().toDouble(), Direction.REVERSE)
             }
 
             tvUnit2.setOnItemClickListener { _, _, pos, _ ->
-                /*globalSecondFactor = viewModel.unitArray.value?.get(pos)?.factor ?: "0"
-                Log.e("Factors", globalSecondFactor)
-                validateAndCalculate(
-                    edtValue1.text.toString(),
-                    edtValue2,
-                    globalFirstFactor,
-                    globalSecondFactor
-                )*/
                 viewModel.changeSecondFactor(pos)
-                // if (validate(binding.edtValue1)) viewModel.calculate(edtValue1.text.toString().toDouble(), Direction.FORWARD)
+                if (validate(edtValue1)) viewModel.calculate(edtValue1.text.toString().toDouble(), Direction.FORWARD)
             }
         }
     }
 
+    //Check whether the given text box is empty. If it is, display 0
     private fun validate(editText: EditText) : Boolean {
-        return if (editText.text.toString() == "" || editText.length() == 0) {
+        return if (editText.text.isEmpty()) {
             editText.setText("0")
             false
         } else {
             true
         }
     }
-
-        //This function validates the input and displays the result
-//    private fun validateAndCalculate(text: CharSequence?,
-//                                     resultEditText: EditText,
-//                                     firstFactor : String,
-//                                     secondFactor: String) : Double {
-//
-//        //Introduce a new variable to be used for the calculation. This allows input validation
-//        //to be performed, eliminating exceptions caused by no input
-//        val textForCalc = if (text == "" || text?.length == 0) {
-//            0.00
-//        } else text.toString().toDouble()
-//
-//        if(!bEditTextBusy){  /* As the value of the two edit boxes are linked, this check ensures there is no infinite loop created when a value is changed */
-//            bEditTextBusy = true
-//
-//            //calculate and display the result of the conversion
-//            result = (textForCalc.toString().toDouble() * firstFactor.toDouble()) / secondFactor.toDouble()
-//
-//            bEditTextBusy = false
-//        }
-//        return result
-//    }
-    }
+}
