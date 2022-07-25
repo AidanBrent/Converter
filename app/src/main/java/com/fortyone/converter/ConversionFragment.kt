@@ -74,7 +74,7 @@ class ConversionFragment : Fragment() {
             binding.tvExact1.text = getString(R.string.exact, binding.edtValue1.text)
             binding.tvExact2.text = getString(R.string.exact, display)
         }
-
+        
         //Populate the spinners based on the array created in the View Model
         viewModel.unitArray.observe(viewLifecycleOwner) { it ->
             val arrayAdapter = ArrayAdapter(

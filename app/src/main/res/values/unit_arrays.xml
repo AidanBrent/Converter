@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string-array name="distance_combo">
         <item>Kilometer (km);1000</item>
         <item>Meter (m);1</item>
