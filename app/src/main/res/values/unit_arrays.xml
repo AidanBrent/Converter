@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="distance_base_values">
+        <item>1000</item> <!-- Kilometer (km) -->
+        <item>1</item> <!-- Meter -->
+        <item>0.01</item> <!-- Centimeter (cm) -->
+        <item>0.001</item> <!-- Millimeter (mm) -->
+        <item>0.000001</item> <!-- Micrometer (µm)-->
+        <item>0.000000001</item> <!-- Nanometer (nm) -->
+        <item>1609.344</item> <!-- Mile (mi) -->
+        <item>0.9144</item> <!-- Yard (yd) -->
+        <item>0.3048</item> <!-- Foot (ft) -->
+        <item>0.0254</item> <!-- Inch (") -->
+        <item>1852</item> <!-- Nautical Mile -->
+        <item>9460730472580800</item> <!-- Light Year -->
+    </string-array>
+
     <string-array name="distance_combo">
-        <item>Kilometer (km);1000</item>
-        <item>Meter (m);1</item>
-        <item>Centimeter (cm);0.01</item>
-        <item>Millimeter (mm);0.001</item>
-        <item>Micrometer (µm);0.000001</item>
-        <item>Nanometer (nm);0.000000001</item>
-        <item>Mile (mi);1609.344</item>
-        <item>Yard (yd);0.9144</item>
-        <item>Foot (ft);0.3048</item>
-        <item>Inch (");0.0254</item>
-        <item>Nautical Mile (nmi);1852</item>
-        <item>Light Year (ly);9460730472580800</item>
+        <item>Kilometer (km);1000</item> <!-- Kilometer (km) -->
+        <item>Meter (m);1</item> <!-- Meter -->
+        <item>Centimeter (cm);0.01</item> <!-- Centimeter (cm) -->
+        <item>Millimeter (mm);0.001</item> <!-- Millimeter (mm) -->
+        <item>Micrometer (µm);0.000001</item> <!-- Micrometer (µm)-->
+        <item>Nanometer (nm);0.000000001</item> <!-- Nanometer (nm) -->
+        <item>Mile (mi);1609.344</item> <!-- Mile (mi) -->
+        <item>Yard (yd);0.9144</item> <!-- Yard (yd) -->
+        <item>Foot (ft);0.3048</item> <!-- Foot (ft) -->
+        <item>Inch (");0.0254</item> <!-- Inch (") -->
+        <item>Nautical Mile (nmi);1852</item> <!-- Nautical Mile -->
+        <item>Light Year (ly);9460730472580800</item> <!-- Light Year -->
     </string-array>
 
     <string-array name="liquid_combo">
@@ -36,17 +51,61 @@
         <item>Imperial Teaspoon;0.00591938802083</item>
         <item>Cubic Foot;0.028316846592</item>
         <item>Cubic Inch;0.016387064</item>
+
     </string-array>
 
-    <string-array name="area_combo">
-        <item>Acre (Int);4046.8564224</item>
-        <item>Hectare;10000</item>
-        <item>Square Foot;0.09290304</item>
-        <item>Square Inch;0.00064516</item>
-        <item>Square Kilometer;0.00064516</item>
-        <item>Square Meter;1</item>
-        <item>Square Mile;2589988.110336</item>
-        <item>Square Yard;0.83612736</item>>
+    <string-array name="distance_units">
+        <item>Kilometer (km)</item>
+        <item>Meter (m)</item>
+        <item>Centimeter (cm)</item>
+        <item>Millimeter (mm)</item>
+        <item>Micrometer (µm)</item>
+        <item>Nanometer (nm)</item>
+        <item>Mile (mi)</item>
+        <item>Yard (yd)</item>
+        <item>Foot (ft)</item>
+        <item>Inch (")</item>
+        <item>Nautical Mile (nmi)</item>
+        <item>Light Year (ly)</item>
     </string-array>
+
+    <string-array name="liquid_units">
+        <item>US Liquid Gallon</item>
+        <item>US Liquid Quart</item>
+        <item>US Liquid Pint</item>
+        <item>US Legal Cup</item>
+        <item>US Fluid Ounce</item>
+        <item>US Tablespoon</item>
+        <item>US Teaspoon</item>
+        <item>Cubic Meter</item>
+        <item>Liter</item>
+        <item>Milliliter</item>
+        <item>Imperial Gallon</item>
+        <item>Imperial Quart</item>
+        <item>Imperial Pint</item>
+        <item>Imperial Cup</item>
+        <item>Imperial Fluid Ounce</item>
+        <item>Imperial Tablespoon</item>
+        <item>Imperial Teaspoon</item>
+
+    </string-array>
+
+    <string-array name="liquid_base_values">
+        <item>0.003785411784</item><!-- US Liquid Gallon -->
+        <item>0.9463529460</item> <!-- US Liquid Quart -->
+        <item>0.473176473</item> <!-- US Liquid Pint -->
+        <item>0.24</item> <!-- US Legal Cup -->
+        <item>0.0295735</item> <!-- US Fluid Ounce -->
+        <item>0.01478676478</item> <!-- US Tablespoon -->
+        <item>0.00492892159375</item> <!-- US Teaspoon -->
+
+
+        <item>0.0284131</item> <!-- Imperial Fluid Ounce -->
+        <item>1</item> <!-- Liter -->
+        <item>1000</item> <!-- Milliliter -->
+
+
+    </string-array>
+
 
 </resources>

@@ -54,6 +54,5 @@ class ToolListFragment : Fragment() {
         toolList.add(Tool("Distance", R.drawable.tool_distance))
         toolList.add(Tool("Liquid", R.drawable.tool_liquid))
         toolList.add(Tool("Temperature", R.drawable.tool_temperature))
-        toolList.add(Tool("Area", R.drawable.tool_distance))
     }
 }
