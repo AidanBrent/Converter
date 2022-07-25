@@ -57,6 +57,5 @@ class ToolListFragment : Fragment() {
         toolList.add(Tool("Mass", R.drawable.tool_mass))
         toolList.add(Tool("Pressure", R.drawable.tool_pressure))
         toolList.add(Tool("Torque", R.drawable.tool_torque))
-
     }
 }
