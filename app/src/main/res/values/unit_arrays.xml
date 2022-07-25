@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string-array name="distance_combo">
-        <item>Kilometer (km);1000</item>
-        <item>Meter (m);1</item>
-        <item>Centimeter (cm);0.01</item>
-        <item>Millimeter (mm);0.001</item>
-        <item>Micrometer (µm);0.000001</item>
-        <item>Nanometer (nm);0.000000001</item>
-        <item>Mile (mi);1609.344</item>
-        <item>Yard (yd);0.9144</item>
-        <item>Foot (ft);0.3048</item>
-        <item>Inch (");0.0254</item>
-        <item>Nautical Mile (nmi);1852</item>
-        <item>Light Year (ly);9460730472580800</item>
+        <item>Kilometer (km);1000</item> <!-- Kilometer (km) -->
+        <item>Meter (m);1</item> <!-- Meter -->
+        <item>Centimeter (cm);0.01</item> <!-- Centimeter (cm) -->
+        <item>Millimeter (mm);0.001</item> <!-- Millimeter (mm) -->
+        <item>Micrometer (µm);0.000001</item> <!-- Micrometer (µm)-->
+        <item>Nanometer (nm);0.000000001</item> <!-- Nanometer (nm) -->
+        <item>Mile (mi);1609.344</item> <!-- Mile (mi) -->
+        <item>Yard (yd);0.9144</item> <!-- Yard (yd) -->
+        <item>Foot (ft);0.3048</item> <!-- Foot (ft) -->
+        <item>Inch (");0.0254</item> <!-- Inch (") -->
+        <item>Nautical Mile (nmi);1852</item> <!-- Nautical Mile -->
+        <item>Light Year (ly);9460730472580800</item> <!-- Light Year -->
     </string-array>
 
     <string-array name="liquid_combo">
@@ -37,7 +36,7 @@
         <item>Cubic Foot;0.028316846592</item>
         <item>Cubic Inch;0.016387064</item>
     </string-array>
-
+    
     <string-array name="area_combo">
         <item>Acre (Int);4046.8564224</item>
         <item>Hectare;10000</item>
