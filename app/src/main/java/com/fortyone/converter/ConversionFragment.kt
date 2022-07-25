@@ -66,7 +66,6 @@ class ConversionFragment : Fragment() {
             val display: String = it.toString().replace("E", " x10^")
             binding.tvExact2.text = getString(R.string.exact, binding.edtValue2.text)
             binding.tvExact1.text = getString(R.string.exact, display)
-
         }
 
         viewModel.secondValue.observe(viewLifecycleOwner) {

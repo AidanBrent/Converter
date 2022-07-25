@@ -31,6 +31,9 @@ class ConversionFragmentViewModel: ViewModel() {
             "Distance" -> _unitID.postValue(R.array.distance_combo)
             "Liquid" -> _unitID.postValue(R.array.liquid_combo)
             "Area" -> _unitID.postValue(R.array.area_combo)
+            "Mass" -> _unitID.postValue(R.array.mass_combo)
+            "Pressure" -> _unitID.postValue(R.array.pressure_combo)
+            "Torque" -> _unitID.postValue(R.array.torque_combo)
         }
     }
 

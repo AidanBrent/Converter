@@ -49,4 +49,32 @@
         <item>Square Yard;0.83612736</item>>
     </string-array>
 
+    <string-array name="mass_combo">
+        <item>Tonne;1000000</item>
+        <item>Kilogram;1000</item>
+        <item>Gram;1</item>
+        <item>Milligram0.001</item>
+        <item>Microgram;0.000001</item>
+        <item>Imperial Ton;1016046.9088</item>
+        <item>US Ton;907184.74</item>
+        <item>Stone;6350.29318</item>
+        <item>Pound;453.59237</item>
+    </string-array>
+
+    <string-array name="pressure_combo">
+        <item>Bar;100000</item>
+        <item>Pascal;1</item>
+        <item>Pound per Square Inch;6894.757</item>
+        <item>Atmosphere (Std);101325</item>
+        <item>Torr;133.3224</item>
+    </string-array>
+
+    <string-array name="torque_combo">
+        <item>Pound-Force-Foot;1.3558179483314004</item>
+        <item>Poundal-Foot;0.0421401100938048</item>
+        <item>Pound Force-Inch;0.1129848290276167</item>
+        <item>Kilogram Force-Meter;9.80665</item>
+        <item>Newton Metre;1</item>
+    </string-array>
+
 </resources>
