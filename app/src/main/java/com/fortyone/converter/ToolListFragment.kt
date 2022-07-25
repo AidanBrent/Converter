@@ -53,6 +53,9 @@ class ToolListFragment : Fragment() {
         //Hardcoded list of tools
         toolList.add(Tool("Distance", R.drawable.tool_distance))
         toolList.add(Tool("Liquid", R.drawable.tool_liquid))
-        toolList.add(Tool("Temperature", R.drawable.tool_temperature))
+        toolList.add(Tool("Area", R.drawable.tool_distance))
+        toolList.add(Tool("Mass", R.drawable.tool_mass))
+        toolList.add(Tool("Pressure", R.drawable.tool_pressure))
+        toolList.add(Tool("Torque", R.drawable.tool_torque))
     }
 }

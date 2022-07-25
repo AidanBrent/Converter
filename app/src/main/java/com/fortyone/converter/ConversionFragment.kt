@@ -49,6 +49,20 @@ class ConversionFragment : Fragment() {
             viewModel.updateUnitsFromArray(resources.getStringArray(it))
         }
 
+        //Fetch and Display the current values for the Edit Texts
+        viewModel.firstValue.observe(viewLifecycleOwner) {
+            binding.edtValue1.setText(displayFormat.format(it))
+            val display: String = it.toString().replace("E", " x10^")
+            binding.tvExact2.text = getString(R.string.exact, binding.edtValue2.text)
+            binding.tvExact1.text = getString(R.string.exact, display)
+        }
+
+        viewModel.secondValue.observe(viewLifecycleOwner) {
+            binding.edtValue2.setText(displayFormat.format(it))
+            val display: String = it.toString().replace("E", " x10^")
+            binding.tvExact1.text = getString(R.string.exact, binding.edtValue1.text)
+            binding.tvExact2.text = getString(R.string.exact, display)
+        }
         //Populate the spinners based on the array created in the View Model
         viewModel.unitArray.observe(viewLifecycleOwner){ it ->
             val arrayAdapter = ArrayAdapter(

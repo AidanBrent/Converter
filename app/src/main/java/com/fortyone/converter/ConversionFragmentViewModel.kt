@@ -19,12 +19,12 @@ class ConversionFragmentViewModel: ViewModel() {
     //A function to be called by the UI layer, determining which tool was selected.
     fun locateArrayResource(toolName: String) {
         when (toolName) {
-            "Distance" -> {
-                _unitList.postValue(R.array.distance_combo)
-            }
-            "Liquid" -> {
-                _unitList.postValue(R.array.liquid_combo)
-            }
+            "Distance" -> _unitID.postValue(R.array.distance_combo)
+            "Liquid" -> _unitID.postValue(R.array.liquid_combo)
+            "Area" -> _unitID.postValue(R.array.area_combo)
+            "Mass" -> _unitID.postValue(R.array.mass_combo)
+            "Pressure" -> _unitID.postValue(R.array.pressure_combo)
+            "Torque" -> _unitID.postValue(R.array.torque_combo)
         }
     }
 
