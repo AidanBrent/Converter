@@ -52,7 +52,7 @@
         <item>Tonne;1000000</item>
         <item>Kilogram;1000</item>
         <item>Gram;1</item>
-        <item>Milligram0.001</item>
+        <item>Milligram;0.001</item>
         <item>Microgram;0.000001</item>
         <item>Imperial Ton;1016046.9088</item>
         <item>US Ton;907184.74</item>
